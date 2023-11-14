@@ -23,7 +23,7 @@ public class OrderMenu {
 
     private void menuValidation(Map<String, Integer> menu) {
         MenuValidation.of(menu)
-                .minimumOrder(UNAVAILABLE_MENU)
+                .minimumOrder(MINIMUM_INPUT)
                 .unavailableMenu(UNAVAILABLE_MENU)
                 .noOnlyDrink(UNAVAILABLE_MENU)
                 .maxOrderCount(MAX_ORDER_MENU);

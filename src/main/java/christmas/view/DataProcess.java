@@ -26,7 +26,7 @@ public class DataProcess {
             String[] parts = menuItem.split("-");
             String menuName = parts[0].trim();
             if (!checkDupNames.add(menuName)) {
-                throw new InputException(ExceptionMessage.UNAVAILABLE_MENU);
+                throw new InputException(ExceptionMessage.DUPLICATE_MENU);
             }
             int quantity = Integer.parseInt(parts[1].trim());
             menu.put(menuName, quantity);

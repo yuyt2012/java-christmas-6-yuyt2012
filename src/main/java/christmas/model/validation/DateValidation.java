@@ -15,7 +15,7 @@ public class DateValidation {
     }
 
     public DateValidation NonNegative(ExceptionMessage exceptionMessage) {
-        if (number < 0) {
+        if (number < 1) {
             throw new InputException(exceptionMessage);
         }
         return this;
