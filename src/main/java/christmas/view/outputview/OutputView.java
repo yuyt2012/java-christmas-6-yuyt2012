@@ -58,25 +58,58 @@ public class OutputView {
     }
 
     public static void printBenefit(int date, Map<String, Integer> menu) {
-        AweekDiscountPolicy aweekDiscountPolicy = AweekDiscountPolicy.of(date);
         TotalPrice totalPrice = new TotalPrice(menu);
-        DiscountPrice discountPrice = new DiscountPrice(date, menu, totalPrice);
         System.out.printf(BENEFIT);
         if (!totalPrice.minimumEvnetPrice()) {
             System.out.printf(NOTHING);
             System.out.println();
         }
         if (totalPrice.minimumEvnetPrice()) {
+            printChristmasPrice(date, menu);
+            printAweekPrice(date, menu);
+            printStardayPrice(date, menu);
+            printGiveawayPrice(date, menu);
+            System.out.println();
+        }
+    }
+
+    private static void printChristmasPrice(int date, Map<String, Integer> menu) {
+        TotalPrice totalPrice = new TotalPrice(menu);
+        DiscountPrice discountPrice = new DiscountPrice(date, menu, totalPrice);
+        if (discountPrice.christmasDiscountPrice() != 0) {
             System.out.printf(String.format(CHRISTMAS_DISCOUNT, discountPrice.christmasDiscountPrice() * -1));
-            if (aweekDiscountPolicy.isWeekday()) {
+        }
+    }
+
+    private static void printAweekPrice(int date, Map<String, Integer> menu) {
+        AweekDiscountPolicy aweekDiscountPolicy = AweekDiscountPolicy.of(date);
+        TotalPrice totalPrice = new TotalPrice(menu);
+        DiscountPrice discountPrice = new DiscountPrice(date, menu, totalPrice);
+        if (aweekDiscountPolicy.isWeekday()) {
+            if (discountPrice.weekdayDiscountPrice() != 0) {
                 System.out.printf(String.format(WEEKDAY_DISCOUNT, discountPrice.weekdayDiscountPrice() * -1));
             }
-            if (!aweekDiscountPolicy.isWeekday()) {
+        }
+        if (!aweekDiscountPolicy.isWeekday()) {
+            if (discountPrice.weekendDiscountPrice() != 0) {
                 System.out.printf(String.format(WEEKEND_DISCOUNT, discountPrice.weekendDiscountPrice() * -1));
             }
+        }
+    }
+
+    private static void printStardayPrice(int date, Map<String, Integer> menu) {
+        TotalPrice totalPrice = new TotalPrice(menu);
+        DiscountPrice discountPrice = new DiscountPrice(date, menu, totalPrice);
+        if (discountPrice.stardayDiscountPrice() != 0) {
             System.out.printf(String.format(STARDAY_DISCOUNT, discountPrice.stardayDiscountPrice() * -1));
+        }
+    }
+
+    private static void printGiveawayPrice(int date, Map<String, Integer> menu) {
+        TotalPrice totalPrice = new TotalPrice(menu);
+        DiscountPrice discountPrice = new DiscountPrice(date, menu, totalPrice);
+        if (discountPrice.giveawayDiscountPrice() != 0) {
             System.out.printf(String.format(GIVEAWAY_DISCOUNT, discountPrice.giveawayDiscountPrice() * -1));
-            System.out.println();
         }
     }
 
