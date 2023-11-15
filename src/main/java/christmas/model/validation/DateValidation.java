@@ -4,10 +4,10 @@ import christmas.model.exception.ExceptionMessage;
 import christmas.model.exception.InputException;
 
 public class DateValidation {
-    private int number;
+    private int date;
 
-    private DateValidation(int number) {
-        this.number = number;
+    private DateValidation(int date) {
+        this.date = date;
     }
 
     public static DateValidation of(int number) {
@@ -15,14 +15,14 @@ public class DateValidation {
     }
 
     public DateValidation NonNegative(ExceptionMessage exceptionMessage) {
-        if (number < 1) {
+        if (date < 1) {
             throw new InputException(exceptionMessage);
         }
         return this;
     }
 
     public DateValidation OutOfRange(int min, int max, ExceptionMessage exceptionMessage) {
-        if (number < min || number > max) {
+        if (date < min || date > max) {
             throw new InputException(exceptionMessage);
         }
         return this;

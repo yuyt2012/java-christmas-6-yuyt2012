@@ -19,7 +19,7 @@ public class OutViewConstant {
     public static final String EXPECT_PAYMENT_PRICE = "%,d원\n";
     public static final String EVENT_BADGE = "<12월 이벤트 배지>\n";
 
-    public OutViewConstant() {
+    private OutViewConstant() {
 
     }
 }
